@@ -5,11 +5,11 @@ import emailjs from '@emailjs/browser';
 // 1. Go to https://www.emailjs.com/ and create a free account
 // 2. Add Gmail as a service (use hoodmandu@gmail.com)
 // 3. Create a new email template with the template below
-// 4. Copy your Service ID, Template ID, and Public Key here
+// 4. Copy  Service ID, Template ID, and Public Key here
 
-const EMAILJS_SERVICE_ID = 'service_fr7a2mh'; // Replace with your Service ID
-const EMAILJS_TEMPLATE_ID = 'template_7xhuas8'; // Replace with your Template ID
-const EMAILJS_PUBLIC_KEY = 'vLawSjbETVW_uRouy'; // Replace with your Public Key
+const EMAILJS_SERVICE_ID = 'service_fr7a2mh';
+const EMAILJS_TEMPLATE_ID = 'template_7xhuas8'; 
+const EMAILJS_PUBLIC_KEY = 'vLawSjbETVW_uRouy'; 
 
 // Initialize EmailJS
 emailjs.init(EMAILJS_PUBLIC_KEY);
@@ -104,76 +104,76 @@ export const sendOrderConfirmationEmail = async (orderData) => {
   }
 };
 
-/**
- * Test email sending - use this to debug
- * Call from browser console: testEmail('your@email.com')
- */
-export const testEmail = async (email) => {
-  const testParams = {
-    toEmail: email,
-    toName: 'Test Customer',
-    orderNumber: 'TEST123',
-    totalAmount: '5,000',
-    itemsList: '• Test Product x1 - Rs. 5,000',
-    itemsHtml: '<tr><td style="padding:12px 0;">Test Product - Rs. 5,000</td></tr>',
-    paymentMethod: 'Test Payment',
-    orderDate: new Date().toLocaleDateString(),
-    shippingAddress: 'Test Address',
-    shippingCity: 'Kathmandu',
-    estimatedDelivery: 'Feb 20 - Feb 22',
-  };
+// /**
+//  * Test email sending - use this to debug
+//  * Call from browser console: testEmail('your@email.com')
+//  */
+// export const testEmail = async (email) => {
+//   const testParams = {
+//     toEmail: email,
+//     toName: 'Test Customer',
+//     orderNumber: 'TEST123',
+//     totalAmount: '5,000',
+//     itemsList: '• Test Product x1 - Rs. 5,000',
+//     itemsHtml: '<tr><td style="padding:12px 0;">Test Product - Rs. 5,000</td></tr>',
+//     paymentMethod: 'Test Payment',
+//     orderDate: new Date().toLocaleDateString(),
+//     shippingAddress: 'Test Address',
+//     shippingCity: 'Kathmandu',
+//     estimatedDelivery: 'Feb 20 - Feb 22',
+//   };
 
-  try {
-    const response = await emailjs.send(
-      EMAILJS_SERVICE_ID,
-      EMAILJS_TEMPLATE_ID,
-      testParams
-    );
-    console.log('Test email sent successfully!', response);
-    return response;
-  } catch (error) {
-    console.error('Test email failed:', error);
-    throw error;
-  }
-};
+//   try {
+//     const response = await emailjs.send(
+//       EMAILJS_SERVICE_ID,
+//       EMAILJS_TEMPLATE_ID,
+//       testParams
+//     );
+//     console.log('Test email sent successfully!', response);
+//     return response;
+//   } catch (error) {
+//     console.error('Test email failed:', error);
+//     throw error;
+//   }
+// };
 
-// Make testEmail available globally for debugging
-if (typeof window !== 'undefined') {
-  window.testHoodManduEmail = testEmail;
-}
-    return { success: false, error };
-  }
-};
+// // Make testEmail available globally for debugging
+// if (typeof window !== 'undefined') {
+//   window.testHoodManduEmail = testEmail;
+// }
+//     return { success: false, error };
+//   }
+// };
 
-/**
- * Get estimated delivery date (3-5 business days)
- */
-const getEstimatedDelivery = () => {
-  const today = new Date();
-  const minDays = 3;
-  const maxDays = 5;
+// /**
+//  * Get estimated delivery date (3-5 business days)
+//  */
+// const getEstimatedDelivery = () => {
+//   const today = new Date();
+//   const minDays = 3;
+//   const maxDays = 5;
   
-  const minDate = new Date(today);
-  const maxDate = new Date(today);
+//   const minDate = new Date(today);
+//   const maxDate = new Date(today);
   
-  // Add business days
-  let addedDays = 0;
-  while (addedDays < minDays) {
-    minDate.setDate(minDate.getDate() + 1);
-    if (minDate.getDay() !== 0 && minDate.getDay() !== 6) addedDays++;
-  }
+//   // Add business days
+//   let addedDays = 0;
+//   while (addedDays < minDays) {
+//     minDate.setDate(minDate.getDate() + 1);
+//     if (minDate.getDay() !== 0 && minDate.getDay() !== 6) addedDays++;
+//   }
   
-  addedDays = 0;
-  while (addedDays < maxDays) {
-    maxDate.setDate(maxDate.getDate() + 1);
-    if (maxDate.getDay() !== 0 && maxDate.getDay() !== 6) addedDays++;
-  }
+//   addedDays = 0;
+//   while (addedDays < maxDays) {
+//     maxDate.setDate(maxDate.getDate() + 1);
+//     if (maxDate.getDay() !== 0 && maxDate.getDay() !== 6) addedDays++;
+//   }
 
-  const formatDate = (date) =>
-    date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+//   const formatDate = (date) =>
+//     date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
 
-  return `${formatDate(minDate)} - ${formatDate(maxDate)}`;
-};
+//   return `${formatDate(minDate)} - ${formatDate(maxDate)}`;
+// };
 
 /**
  * Get the clean HTML email template
